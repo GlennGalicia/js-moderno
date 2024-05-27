@@ -10,21 +10,21 @@ registarEventListeners()
 function registarEventListeners() {
 
     // cuando agregas un curso presionando "Agregar al carrito"
-    listaCursos.addEventListener('click', agregarCurso)
+    listaCursos.addEventListener('click', identificarCursos)
 }
 
 // Funciones
 
-function agregarCurso(e) {
+function identificarCursos(e) {
 
     e.preventDefault()
 
     if (e.target.classList.contains('agregar-carrito')) {
-        leerCurso(e.target.parentElement.parentElement)
+        addCourse(e.target.parentElement.parentElement)
     }
 }
 
-function leerCurso(curso) {
+function addCourse(curso) {
 
     // crear un objeto con el contenido del curso actual
     const infoCurso = {
@@ -39,14 +39,14 @@ function leerCurso(curso) {
     articulosCarrito = [...articulosCarrito, infoCurso]
 
     // poblar HTML
-    carritoCompras()
+    showShoppingCart()
 }
 
 // Muestra carrito de compras en HTML
-function carritoCompras() {
+function showShoppingCart() {
 
     // limpiar HTML
-    limpiarHTML()
+    cleanHTML()
 
     // recorre el HTML
     articulosCarrito.forEach(curso => {
@@ -78,7 +78,7 @@ function carritoCompras() {
 }
 
 // limpiar el HTML del tbody
-function limpiarHTML() {
+function cleanHTML() {
 
     // forma lenta
     carritoCompras.innerHTML = ''
