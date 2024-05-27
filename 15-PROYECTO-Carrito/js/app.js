@@ -35,8 +35,24 @@ function addCourse(curso) {
         count: 1
     }
 
-    // agregar elementos al carrito de compra
-    articulosCarrito = [...articulosCarrito, infoCurso]
+    // revisar si curso existe en el carrito
+    const existe = articulosCarrito.some(curso => curso.id === infoCurso.id)
+    if (existe) {
+        // actualizamos la cantidad
+        const cursos = articulosCarrito.map(curso => {
+            if (curso.id === infoCurso.id) {
+                curso.count++ // retorna objeto actualizado
+                return curso
+            } else {
+                return curso // retirba los objetos que no son duplicados
+            }
+        })
+
+        articulosCarrito = [...cursos]
+    } else {
+        // añadimos al carrito
+        articulosCarrito = [...articulosCarrito, infoCurso]
+    }
 
     // poblar HTML
     showShoppingCart()
@@ -81,7 +97,7 @@ function showShoppingCart() {
 function cleanHTML() {
 
     // forma lenta
-    carritoCompras.innerHTML = ''
+    //carritoCompras.innerHTML = ''
 
     // forma rapida
     while (contenedorCarrito.firstChild)
