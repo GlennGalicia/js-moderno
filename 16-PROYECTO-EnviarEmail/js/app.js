@@ -20,15 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if(e.target.value.trim() !== ''){
            console.log('Si hay algo')
         } else {
-            mostrarAlerta(`el campo ${e.target.id} no puede estar vacio`)
+            mostrarAlerta(`el campo ${e.target.id} no puede estar vacio`,e.target.parentElement)
         }
     }
 
-    function mostrarAlerta(mesagge){
+    function mostrarAlerta(mesagge, reference){
         const alerta = document.createElement('p')
         alerta.textContent = mesagge
         alerta.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center')
 
-        formulario.appendChild(alerta)
+        reference.appendChild(alerta)
     }
 })
