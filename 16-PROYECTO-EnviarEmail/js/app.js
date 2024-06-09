@@ -25,10 +25,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mostrarAlerta(mesagge, reference){
-        const alerta = document.createElement('p')
-        alerta.textContent = mesagge
-        alerta.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center')
 
-        reference.appendChild(alerta)
+        // Verificar si ya existe una alerta
+        const alerta = reference.querySelector('.bg-red-600')
+        if(alerta){
+            alerta.remove()
+        }
+
+        const error = document.createElement('p')
+        error.textContent = mesagge
+        error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center')
+
+        reference.appendChild(error)
     }
 })
