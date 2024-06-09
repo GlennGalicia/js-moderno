@@ -43,3 +43,54 @@ const form = document.querySelector('#formulario')
 ```js
 const form = document.querySelectorAll('#formulario')
 ```
+
+# Modify elements 
+```js
+const encabezado = document.querySelector('.contenido-hero h1')
+
+encabezado.innerText // recupera solo texto visibility: hidden
+encabezado.textContent // recupera solo texto
+encabezado.innerHTML // recupera el html
+
+const portada = document.querySelector('portada').textContent = 'Nueva Portada.'
+
+// modificar estilos
+const h1 = document.querySelector('h1')
+
+// forma 1
+h1.style.backgroundColor = 'red'
+h1.style.fontFamily = 'Arial'
+h1.style.textTransform = 'uppercase'
+
+//forma 2
+h1.classList.add('nueva-clase', 'segunda-clase')
+h1.classList.remove('segunda-clase')
+```
+
+# Traversing the DOM
+```js
+const navegacion = document.querySelector('.navegacion')
+
+console.log(navegacion.childNodes) // los espacios en blanco son considerados elementos
+
+navegacion.childen // elementos reales HTML
+navegacion.childen[0] // elemento especifico reales HTML
+
+// traversing de hijo a padre
+const card = document.querySelector('.card')
+card.parentElement.parentElement
+
+// traversing de hijo a hijo
+card.nextElementSibling
+card.previousElementSibling
+```
+# Delete element DOM
+```js
+// eliminar hijo
+const primerEnlace = document.querySelector('a')
+primerEnlace.remove()
+
+// eliminar desde el padre
+const navegacion = document.querySelector('.navegacion')
+navegacion.removeChild(navegacion.children[2])
+```
