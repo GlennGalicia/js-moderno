@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
             mostrarAlerta(`el campo ${e.target.id} no puede estar vacio`,e.target.parentElement)
             return
         }
+        
+        if(e.target.id == 'email' && !validarEmail(e.target.value)){
+            mostrarAlerta('El mail registrado no es valido',e.target.parentElement)
+            return
+        }
+
         limpiarAlerta(e.target.parentElement)
     }
 
@@ -42,4 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
             alerta.remove()
         }
     }
+ 
+    function validarEmail(email){
+        const expresion = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+        return expresion.test(email)
+    }
+
 })
