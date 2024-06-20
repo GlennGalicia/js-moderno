@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputMensaje = document.querySelector('#mensaje')
     const formulario = document.querySelector('#formulario')
     const btnSubmit = document.querySelector('#formulario button[type="submit"]')
+    const btnReset = document.querySelector('#formulario button[type="reset"]')
 
     console.log(inputEmail)
     console.log(inputAsunto)
@@ -21,6 +22,19 @@ document.addEventListener('DOMContentLoaded', function () {
     inputEmail.addEventListener('input', validar)
     inputAsunto.addEventListener('input', validar)
     inputMensaje.addEventListener('input', validar)
+
+    // Resetear formulario
+    btnReset.addEventListener('click', e => {
+        e.preventDefault()
+
+        // Limpiar los campos
+        email.email = ''
+        email.asunto = ''
+        email.mensaje = ''
+
+        formulario.reset()
+        comprobarDatos()
+    })
 
     // Validación de datos
     function validar(e) {
@@ -71,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return expresion.test(email)
     }
 
-    function comprobarDatos(email) {
+    function comprobarDatos() {
         if (Object.values(email).includes('')) {
             btnSubmit.classList.add('opacity-50')
             btnSubmit.disabled = true
