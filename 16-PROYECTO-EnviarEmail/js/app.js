@@ -95,6 +95,17 @@ document.addEventListener('DOMContentLoaded', function () {
             spinner.classList.remove('flex')
             spinner.classList.add('hidden')
             reiniciarFormulario()
+
+            // Mostrar mensaje de envio
+            const mensaje = document.createElement('p')
+            mensaje.classList.add('bg-green-500', 'text-white', 'p-2', 'text-center', 'rounded-lg', 'my-10', 'font-bold', 'uppercase', 'text-sm')
+            mensaje.textContent = 'Email enviado correctamente'
+            formulario.appendChild(mensaje)
+
+            setTimeout(() => {
+                mensaje.remove()
+            }, 3000)
+
         }, 3000)
     }
 
