@@ -24,14 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Resetear formulario
     btnReset.addEventListener('click', e => {
         e.preventDefault()
-
-        // Limpiar los campos
-        email.email = ''
-        email.asunto = ''
-        email.mensaje = ''
-
-        formulario.reset()
-        comprobarDatos()
+        reiniciarFormulario()
     })
 
     // Validación de datos
@@ -97,5 +90,21 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault()
         spinner.classList.add('flex')
         spinner.classList.remove('hidden')
+
+        setTimeout(() => {
+            spinner.classList.remove('flex')
+            spinner.classList.add('hidden')
+            reiniciarFormulario()
+        }, 3000)
+    }
+
+    function reiniciarFormulario() {
+        // Limpiar los campos
+        email.email = ''
+        email.asunto = ''
+        email.mensaje = ''
+
+        formulario.reset()
+        comprobarDatos()
     }
 })
