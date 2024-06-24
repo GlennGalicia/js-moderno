@@ -96,7 +96,20 @@ function llenarSelect() {
 
 function filtrarAuto() {
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinPrice).filter(filtrarMaxPrice).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor)
-    mostrarAutos(resultado)
+
+    if (resultado.length) {
+        mostrarAutos(resultado)
+    } else {
+        noResultado()
+    }
+}
+
+function noResultado() {
+    limpiarHTML()
+    const noResultado = document.createElement('div')
+    noResultado.classList.add('alerta', 'error')
+    noResultado.textContent = 'No hay resultados, intenta con otros términos de búsqueda'
+    resultado.appendChild(noResultado)
 }
 
 // Retorna objetos que cumplan con la condición
