@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 marca.addEventListener('change', e => {
     autoBusqueda.marca = e.target.value
+    filtrarAuto()
 })
 
 year.addEventListener('change', e => {
@@ -53,7 +54,6 @@ transmision.addEventListener('change', e => {
 
 color.addEventListener('change', e => {
     autoBusqueda.color = e.target.value
-    console.log(autoBusqueda);
 })
 
 // Funciones
@@ -77,4 +77,20 @@ function llenarSelect() {
         option.textContent = i
         year.appendChild(option)
     }
+}
+
+function filtrarAuto() {
+    const resultado = autos.filter(filtrarMarca)
+    console.log(resultado);
+}
+
+// Retorna objetos que cumplan con la condición
+function filtrarMarca(auto) {
+    const { marca } = autoBusqueda
+
+    if (marca) {
+        return auto.marca === marca
+    }
+
+    return auto
 }
