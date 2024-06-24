@@ -23,7 +23,7 @@ const autoBusqueda = {
 
 // Eventos
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarAutos();
+    mostrarAutos(autos);
     llenarSelect();
 });
 
@@ -33,7 +33,8 @@ marca.addEventListener('change', e => {
 })
 
 year.addEventListener('change', e => {
-    autoBusqueda.year = e.target.value
+    autoBusqueda.year = parseInt(e.target.value)
+    filtrarAuto()
 })
 
 minimo.addEventListener('change', e => {
@@ -57,7 +58,10 @@ color.addEventListener('change', e => {
 })
 
 // Funciones
-function mostrarAutos() {
+function mostrarAutos(autos) {
+
+    limpiarHTML()
+
     autos.forEach(auto => {
 
         // Destructuring
@@ -70,6 +74,12 @@ function mostrarAutos() {
     });
 }
 
+function limpiarHTML() {
+    while (resultado.firstChild) {
+        resultado.removeChild(resultado.firstChild)
+    }
+}
+
 function llenarSelect() {
     for (let i = maxYear; i >= minYear; i--) {
         const option = document.createElement('option')
@@ -80,8 +90,8 @@ function llenarSelect() {
 }
 
 function filtrarAuto() {
-    const resultado = autos.filter(filtrarMarca)
-    console.log(resultado);
+    const resultado = autos.filter(filtrarMarca).filter(filtrarYear)
+    mostrarAutos(resultado)
 }
 
 // Retorna objetos que cumplan con la condición
@@ -91,6 +101,14 @@ function filtrarMarca(auto) {
     if (marca) {
         return auto.marca === marca
     }
+    return auto
+}
 
+function filtrarYear(auto) {
+    const { year } = autoBusqueda
+
+    if (year) {
+        return auto.year === year
+    }
     return auto
 }
