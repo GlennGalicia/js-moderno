@@ -2,12 +2,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const email = {
         email: '',
+        ccEmail: '',
         asunto: '',
         mensaje: ''
     }
 
     // Campos Datos Usuario
     const inputEmail = document.querySelector('#email')
+    const ccEmail = document.querySelector('#ccEmail')
     const inputAsunto = document.querySelector('#asunto')
     const inputMensaje = document.querySelector('#mensaje')
     const formulario = document.querySelector('#formulario')
@@ -17,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Asignar Eventos a los inputs
     inputEmail.addEventListener('input', validar)
+    ccEmail.addEventListener('input', validar)
     inputAsunto.addEventListener('input', validar)
     inputMensaje.addEventListener('input', validar)
     formulario.addEventListener('submit', enviarEmail)
@@ -29,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Validación de datos
     function validar(e) {
+
         if (e.target.value.trim() === '') {
             mostrarAlerta(`el campo ${e.target.id} no puede estar vacio`, e.target.parentElement)
             email[e.target.id] = ''
@@ -43,10 +47,20 @@ document.addEventListener('DOMContentLoaded', function () {
             return
         }
 
+        if (e.target.id == 'ccEmail' && !validarEmail(e.target.value)) {
+            mostrarAlerta('El mail registrado no es valido', e.target.parentElement)
+            email[e.target.id] = ''
+            comprobarDatos(email)
+            return
+        }
+
+
         limpiarAlerta(e.target.parentElement)
 
         // Asignar los valores al objeto
         email[e.target.id] = e.target.value.trim().toLowerCase()
+
+        console.log(email)
 
         // Comprobar si todos los campos estan completos
         comprobarDatos(email)
@@ -77,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function comprobarDatos() {
+
         if (Object.values(email).includes('')) {
             btnSubmit.classList.add('opacity-50')
             btnSubmit.disabled = true
@@ -112,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function reiniciarFormulario() {
         // Limpiar los campos
         email.email = ''
+        email.ccEmail = ''
         email.asunto = ''
         email.mensaje = ''
 
