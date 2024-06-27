@@ -19,6 +19,15 @@ function agregarTweet(e) {
         return;
     }
 
+    const tweetObj = {
+        id: Date.now(),
+        tweet
+    }
+    tweets = [...tweets, tweetObj]
+
+    crearHTML()
+
+    formulario.reset()
 }
 
 function mostrarError(error) {
@@ -31,4 +40,25 @@ function mostrarError(error) {
     setTimeout(() => {
         mensajeError.remove()
     }, 3000)
+}
+
+function crearHTML() {
+
+    limpiarHTML()
+
+    if (tweets.length > 0) {
+
+        tweets.forEach(tweet => {
+            const li = document.createElement('li')
+            li.innerHTML = tweet.tweet
+            listaTweets.appendChild(li)
+        })
+
+    }
+}
+
+function limpiarHTML() {
+    while (listaTweets.firstChild) {
+        listaTweets.removeChild(listaTweets.firstChild)
+    }
 }
