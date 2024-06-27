@@ -94,3 +94,29 @@ primerEnlace.remove()
 const navegacion = document.querySelector('.navegacion')
 navegacion.removeChild(navegacion.children[2])
 ```
+
+# Local Storage
+```js
+// guardar items
+const producto = {
+    'nombre': 'Monitor 24 Pulgadas',
+    'precio': 300
+}
+
+const meses = ['Enero', 'Febrero', 'Marzo']
+
+localStorage.setItem('nombre', 'Glenn Galicia')
+localStorage.setItem('producto', JSON.stringify(producto))
+localStorage.setItem('meses', JSON.stringify(meses))
+
+// recuperar items
+const nombre = localStorage.getItem('nombre')
+const productoString = JSON.parse(localStorage.getItem('producto'));
+const mesesString = JSON.parse(localStorage.getItem('meses'))
+
+// eliminar 1 item
+localStorage.removeItem('nombre');
+
+// limpiar todo el localStorage
+localStorage.clear();
+```
