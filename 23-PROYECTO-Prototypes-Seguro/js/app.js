@@ -1,8 +1,46 @@
 // Constructores
-function Seguros(marca, anio, tipo) {
+function Seguros(marca, year, tipo) {
     this.marca = marca;
-    this.anio = anio;
+    this.year = year;
     this.tipo = tipo;
+}
+
+Seguros.prototype.cotizarSeguro = function(){
+    /* 
+        1 = Americano 1.15
+        2 = Asiatico 1.05
+        3 = Europeo 1.35
+    */
+
+    let cantidad
+    const base = 2000
+
+    switch (this.marca) {
+        case '1':
+            cantidad = base * 1.15
+            break;
+        case '2':
+            cantidad = base * 1.05
+            break;
+        case '3':
+            cantidad = base * 1.35    
+        default:
+            break;
+    }
+
+    const diferencia = new Date().getFullYear - this.year
+    cantidad -= ((diferencia * 3) * cantidad) / 100
+
+    /*
+        Si el seguro es básico se multiplica por un 30% más.
+        Si el seguro es completo se multiplica por un 50% más.
+    */
+
+    if (this.tipo === 'basico') {
+        cantidad *= 1.30
+    } else {
+        cantidad *= 1.50
+    }
 }
 
 function UI() { }
@@ -73,9 +111,11 @@ function cotizarSeguro(e) {
         return
     }
 
-    ui.mostrarMensaje('Cotizando', 'exito')
+    ui.mostrarMensaje('Cotizando...', 'exito')
 
     // Instanciar el seguro
+    const seguro = new Seguros(marca, year, tipo)
+    console.log(seguro);
 
     // Utilizar el prototype que va a cotizar
 }
